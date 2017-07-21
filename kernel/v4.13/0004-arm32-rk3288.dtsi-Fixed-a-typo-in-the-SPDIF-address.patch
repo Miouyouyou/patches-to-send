@@ -1,0 +1,40 @@
+From 2face62560db5abbc77e74ceb9899c8d5fc6b0e3 Mon Sep 17 00:00:00 2001
+From: Miouyouyou Myy <myy@miouyouyou.fr>
+Date: Fri, 21 Jul 2017 00:11:37 +0000
+Subject: [PATCH 4/4] arm32: rk3288.dtsi: Fixed a typo in the SPDIF address
+
+There's a typo in the SPDIF address, which read :
+* ff88b0000 (9 digits)
+instead of :
+* ff8b0000 (8 digits)
+
+Signed-off-by: Miouyouyou Myy <myy@miouyouyou.fr>
+---
+ arch/arm/boot/dts/rk3036.dtsi | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/arch/arm/boot/dts/rk3036.dtsi b/arch/arm/boot/dts/rk3036.dtsi
+index ec91325..fe2c1aa 100644
+--- a/arch/arm/boot/dts/rk3036.dtsi
++++ b/arch/arm/boot/dts/rk3036.dtsi
+@@ -261,7 +261,7 @@
+ 		max-frequency = <37500000>;
+ 		clocks = <&cru HCLK_SDIO>, <&cru SCLK_SDIO>,
+ 			 <&cru SCLK_SDIO_DRV>, <&cru SCLK_SDIO_SAMPLE>;
+-		clock-names = "biu", "ciu", "ciu_drv", "ciu_sample";
++		clock-names = "biu", "ciu", "ciu-drive", "ciu-sample";
+ 		fifo-depth = <0x100>;
+ 		interrupts = <GIC_SPI 15 IRQ_TYPE_LEVEL_HIGH>;
+ 		resets = <&cru SRST_SDIO>;
+@@ -279,7 +279,7 @@
+ 		max-frequency = <37500000>;
+ 		clocks = <&cru HCLK_EMMC>, <&cru SCLK_EMMC>,
+ 			 <&cru SCLK_EMMC_DRV>, <&cru SCLK_EMMC_SAMPLE>;
+-		clock-names = "biu", "ciu", "ciu_drv", "ciu_sample";
++		clock-names = "biu", "ciu", "ciu-drive", "ciu-sample";
+ 		default-sample-phase = <158>;
+ 		disable-wp;
+ 		dmas = <&pdma 12>;
+-- 
+2.10.2
+

@@ -1,0 +1,48 @@
+From db991861ccb192af5f754f6786dd7d279b2927e0 Mon Sep 17 00:00:00 2001
+From: Miouyouyou Myy <myy@miouyouyou.fr>
+Date: Fri, 21 Jul 2017 00:09:06 +0000
+Subject: [PATCH 3/4] Fixed typos in mmc clock names
+
+The dw_mmc-rockchip driver need 2 clocks named :
+* "ciu-drive"
+* "ciu-sample"
+
+While the errors messages in the code seems to hint that the clock
+names are ciu_drv and ciu_sample, the driver is clearly looking for
+"ciu-drive" and "ciu-sample" named clocks.
+
+Signed-off-by: Miouyouyou Myy <myy@miouyouyou.fr>
+---
+ arch/arm/boot/dts/rk322x.dtsi | 2 +-
+ arch/arm/boot/dts/rk3288.dtsi | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/arch/arm/boot/dts/rk322x.dtsi b/arch/arm/boot/dts/rk322x.dtsi
+index f3e4ffd..9e87fd7 100644
+--- a/arch/arm/boot/dts/rk322x.dtsi
++++ b/arch/arm/boot/dts/rk322x.dtsi
+@@ -508,7 +508,7 @@
+ 		max-frequency = <37500000>;
+ 		clocks = <&cru HCLK_EMMC>, <&cru SCLK_EMMC>,
+ 			 <&cru SCLK_EMMC_DRV>, <&cru SCLK_EMMC_SAMPLE>;
+-		clock-names = "biu", "ciu", "ciu_drv", "ciu_sample";
++		clock-names = "biu", "ciu", "ciu-drive", "ciu-sample";
+ 		bus-width = <8>;
+ 		default-sample-phase = <158>;
+ 		num-slots = <1>;
+diff --git a/arch/arm/boot/dts/rk3288.dtsi b/arch/arm/boot/dts/rk3288.dtsi
+index 83be112..8798c3c 100644
+--- a/arch/arm/boot/dts/rk3288.dtsi
++++ b/arch/arm/boot/dts/rk3288.dtsi
+@@ -914,7 +914,7 @@
+ 		status = "disabled";
+ 	};
+ 
+-	spdif: sound@ff88b0000 {
++	spdif: sound@ff8b0000 {
+ 		compatible = "rockchip,rk3288-spdif", "rockchip,rk3066-spdif";
+ 		reg = <0xff8b0000 0x10000>;
+ 		#sound-dai-cells = <0>;
+-- 
+2.10.2
+
